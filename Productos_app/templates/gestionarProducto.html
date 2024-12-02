@@ -1,0 +1,75 @@
+{% extends "base.html" %}
+{% load static %}
+{% block cuerpo %}
+<div class="row">
+    <div class="col-md-4">
+        <h1>Registrar Producto</h1>
+        <form action="/registrarProducto/" method="POST">
+            {% csrf_token %}
+            <div class="form-group">
+                <input type="text" id="txtid_producto" name="txtid_producto" class="form-control" placeholder="ID Producto" maxlength="6" required>
+            </div>
+            <div class="form-group">
+                <input type="text" id="txtsucursal" name="txtsucursal" class="form-control" placeholder="Id Sucursal" maxlength="100" required>
+            </div>
+            <div class="form-group">
+                <input type="text" id="txtnom_pro" name="txtnom_pro" class="form-control" placeholder="Nombre Producto" required>
+            </div>
+            <div class="form-group">
+                <input type="text" id="numprecio" name="numprecio" class="form-control" placeholder="Precio" required>
+            </div>
+            <div class="form-group">
+                <input type="text" id="txtmarca" name="txtmarca" class="form-control" placeholder="Marca" maxlength="100" required>
+            </div>
+            <div class="form-group">
+                <input type="text" id="txtstock" name="txtstock" class="form-control" placeholder="Stock" maxlength="100" required>
+            </div>
+            <div class="form-group">
+                <input type="text" id="txttipo_pro" name="txttipo_pro" class="form-control" placeholder="Tipo Producto" required>
+            </div>
+            <div class="form-group">
+                <input type="text" id="txtFecha" name="txtFecha" class="form-control" placeholder="Fecha creacion " maxlength="100" required>
+            </div>
+            <button type="submit" class="btn btn-primary">Guardar</button>
+        </form>
+    </div>
+
+    <div class="col-md-8">
+        <h1>Listado de Productos</h1>
+        <img class="rounded mx-auto d-block" src="{% static "img/TABAQUERIA.jpg" %}" alt="" />
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>ID</th>
+                    <th>ID Sucursal</th>
+                    <th>Nombre del Producto</th>
+                    <th>Precio</th>
+                    <th>Marca</th>
+                    <th>Strock</th>
+                    <th>Tipo de Producto</th>
+                    <th>Fecha de Creacion</th>
+                    <th colspan="2">Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for p in misproductos %}
+                <tr>
+                    <td>{{ forloop.counter }}</td>
+                    <td>{{ p.id_producto }}</td>
+                    <td>{{ p.id_suculsal }}</td>
+                    <td>{{ p.nombre_producto }}</td>
+                    <td>{{ p.precio }}</td>
+                    <td>{{ p.marca }}</td>
+                    <td>{{ p.stock }}</td>
+                    <td>{{ p.Tipo_produc }}</td>
+                    <td>{{ p.Fecha_creacion }}</td>
+                    <td><a href="seleccionarProducto/{{ p.id_producto }}" class="btn btn-info">Editar</a></td>
+                    <td><a href="borrarProducto/{{ p.id_producto }}" class="btn btn-danger">Borrar</a></td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}

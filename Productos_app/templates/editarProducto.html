@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+{% block cuerpo %}
+<div class="row">
+    <div class="col-md-4 offset-md-4">
+    
+        <h1>Editar Producto</h1>
+        <form action="/editarProducto/" method="POST">
+            {% csrf_token %}
+            <div class="form-group">
+                <input type="text" id="txtid_producto" name="txtid_producto" class="form-control" value="{{misproductos.id_producto}}" maxlength="6" readonly>
+            </div>
+            <div class="form-group">
+                <input type="text" id="txtsucursal" name="txtsucursal" class="form-control" value="{{misproductos.id_suculsal}}" maxlength="100" required>
+            </div>
+            <div class="form-group">
+                <input type="text" id="txtnom_pro" name="txtnom_pro" class="form-control" value="{{misproductos.nombre_producto}}" required>
+            </div>
+            <div class="form-group">
+                <input type="num" id="numprecio" name="numprecio" class="form-control" value="{{misproductos.precio}}" required>   
+            </div>
+            <div class="form-group">
+                <input type="text" id="txtmarca" name="txtmarca" class="form-control" value="{{misproductos.marca}}" maxlength="100" required>
+            </div>
+            <div class="form-group">
+                <input type="text" id="txtstock" name="txtstock" class="form-control" value="{{misproductos.stock}}" maxlength="100" required>
+            </div>
+            <div class="form-group">
+                <input type="text" id="txttipo_pro" name="txttipo_pro" class="form-control" value="{{misproductos.Tipo_produc}}" required>
+            </div>
+            <div class="form-group">
+                <input type="text" id="txtFecha" name="txtFecha" class="form-control" value="{{misproductos.Fecha_creacion}}" maxlength="100" required>
+            </div>
+            <button type="submit" class="btn btn-primary">Guardar</button>
+        </form>
+    </div>
+</div>
+{% endblock %}
