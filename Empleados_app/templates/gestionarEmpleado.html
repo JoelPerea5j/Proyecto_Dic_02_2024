@@ -1,0 +1,78 @@
+{% extends "base.html"%}
+{% load static %}
+{% block cuerpo %}
+<div class="row"><!---la fila-->
+<div class="col-sm-12 col-md-4 col-lg-4  col-xl-4"><!--columna izquierda-->
+    <h1>registrar Empleado</h1>
+    <div class="card"><!--Tarjeta-->
+      <div class="card-body">
+        <form action="/registrarEmpleado/" method="POST"> {% csrf_token %}<!--formulario-->
+
+          <div class="form-group">
+            <input type="text" id="txtid_empleado" name="txtid_empleado" class="form-control" placeholder="id trabajador" minLenght="6" maxLenght="6" required>
+          </div>
+          <div class="form-group">
+            <input type="text" id="txtnombre" name="txtnombre" class="form-control" placeholder="Nombre" maxLenght="100" required>
+          </div>
+          <div class="form-group">
+            <input type="text" id="txtapellido" name="txtapellido" class="form-control" placeholder="apellido" maxLenght="100" required>
+          </div>
+          <div class="form-group">
+            <input type="text" id="numsalario" name="numsalario" class="form-control" placeholder="salario" maxLenght="20" required>
+          </div>
+          <div class="form-group">
+            <input type="text" id="txtfecha" name="txtfecha" class="form-control" placeholder="fecha_nacimiento" maxLenght="100" required>
+          </div>
+          <div class="form-group">
+            <input type="text" id="txtcurp" name="txtcurp" class="form-control" placeholder="curp" maxLenght="100" required>
+          </div>
+          <div class="form-group">
+            <input type="text" id="txtRFC" name="txtRFC" class="form-control" placeholder="RFC" maxLenght="100" required>
+          </div>
+          <div class="form-group">
+          <button type="submit" class="btn btn-primary">Guardar</button>
+          </div>
+
+        </form>
+      </div>
+    </div>
+
+</div>
+<div class="col-sm-12 col-md-4 col-lg-8 col-xl-4"><!--columna derecha-->
+    <h1>Listado de Empleados</h1>
+    <img class="rounded mx-auto d-block" src="{% static "img/TABAQUERIA.jpg" %}" alt="alexis" />
+
+    <div class="table-responsive"> <!--tabla responsiva-->
+        <table class="table table-striped">
+            <thead>
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">id empleado</th>
+                <th scope="col">nombre</th>
+                <th scope="col">apellido</th>
+                <th scope="col">salario</th>
+                <th scope="col">fecha_nacimiento</th>
+                <th scope="col">curp</th>
+                <th scope="col">RFC</th>
+              </tr>
+            </thead>
+            <tbody>
+            {% for m in misempleados %}
+            <tr>
+                <td>{{forloop.counter}}</td>
+                <td>{{m.id_empleado}}</td>
+                <td>{{m.nombre}}</td>
+                <td>{{m.apellido}}</td>
+                <td>{{m.salario}}</td>
+                <td>{{m.fecha_nacimiento}}</td>
+                <td>{{m.curp}}</td>
+                <td>{{m.RFC}}</td>
+                <td><a href="seleccionarEmpleado/{{m.id_empleado}}" class="btn btn-info">Editar</td> <!--falta link-->
+                  <td><a href="borrarEmpleado/{{m.id_empleado}}" class="btn btn-danger">Borrar</td> <!--falta link-->
+                
+            </tr>
+            {% endfor %}
+            </tbody>
+          </table>
+</div>
+{% endblock %}

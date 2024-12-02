@@ -1,0 +1,60 @@
+{% extends "base.html" %}
+{% load static %}
+{% block cuerpo %}
+<div class="row">
+    <div class="col-md-4">
+        <h1>Registrar Cliente</h1>
+        <form action="/registrarCliente/" method="POST">
+            {% csrf_token %}
+            <div class="form-group">
+                <input type="text" id="txtNombre" name="txtNombre" class="form-control" placeholder="Nombre" maxlength="6" required>
+            </div>
+            <div class="form-group">
+                <input type="text" id="txtApellido" name="txtApellido" class="form-control" placeholder="Apellido" maxlength="100" required>
+            </div>
+            <div class="form-group">
+                <input type="text" id="txtINE" name="txtINE" class="form-control" placeholder="INE" required>
+            </div>
+            <div class="form-group">
+                <input type="text" id="txtDomicilio" name="txtDomicilio" class="form-control" placeholder="Ingrese su domicilio" required>
+            </div>
+            <div class="form-group">
+                <input type="text" id="txtFecha" name="txtFecha" class="form-control" placeholder=" Fecha Nacimiento" maxlength="100" required>
+            </div>
+            <button type="submit" class="btn btn-primary">Guardar</button>
+        </form>
+    </div>
+
+    <div class="col-md-8">
+        <h1>Listado de Clientes</h1>
+        <img class="rounded mx-auto d-block" src="{% static "img/TABAQUERIA.jpg" %}" alt="" />
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Nombre</th>
+                    <th>Apellidos</th>
+                    <th>INE</th>
+                    <th>Domicilio</th>
+                    <th>Fecha_Nacimiente</th>
+                    <th colspan="2">Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for p in elcliente %}
+                <tr>
+                    <td>{{ forloop.counter }}</td>
+                    <td>{{ p.Nombre }}</td>
+                    <td>{{ p.Apellidos }}</td>
+                    <td>{{ p.INE }}</td>
+                    <td>{{ p.Domicilio }}</td>
+                    <td>{{ p.Fecha_Nacimiente }}</td>
+                    <td><a href="seleccionarCliente/{{p.Nombre }}" class="btn btn-info">Editar</a></td>
+                    <td><a href="borrarCliente/{{p.Nombre }}" class="btn btn-danger">Borrar</a></td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}
