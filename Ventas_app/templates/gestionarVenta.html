@@ -1,0 +1,70 @@
+{% extends "base.html" %}
+{% load static %}
+{% block cuerpo %}
+<div class="row">
+    <div class="col-md-4">
+        <h1>Registrar Venta</h1>
+        <form action="/registrarVenta/" method="POST">
+            {% csrf_token %}
+            <div class="form-group">
+                <input type="text" id="txtVentas" name="txtVentas" class="form-control" placeholder="ID Ventas" maxlength="6" required>
+            </div>
+            <div class="form-group">
+                <input type="text" id="txtProduc" name="txtProduc" class="form-control" placeholder="ID Producto" maxlength="100" required>
+            </div>
+            <div class="form-group">
+                <input type="text" id="txtCliente" name="txtCliente" class="form-control" placeholder="ID Cliente" required>
+            </div>
+            <div class="form-group">
+                <input type="text" id="txtPago" name="txtPago" class="form-control" placeholder="Metodo de Pago" required>
+            </div>
+            <div class="form-group">
+                <input type="text" id="txtFecha" name="txtFecha" class="form-control" placeholder="Fecha Venta" maxlength="100" required>
+            </div>
+            <div class="form-group">
+                <input type="text" id="txtEmpleado" name="txtEmpleado" class="form-control" placeholder="Id Empleado" required>
+            </div>
+            <div class="form-group">
+                <input type="text" id="txtTotal" name="txtTotal" class="form-control" placeholder="Total" maxlength="100" required>
+            </div>
+            <button type="submit" class="btn btn-primary">Guardar</button>
+        </form>
+    </div>
+
+    <div class="col-md-8">
+        <h1>Listado de Ventas</h1>
+        <img class="rounded mx-auto d-block" src="{% static "img/TABAQUERIA.jpg" %}" alt="" />
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Id_Ventas</th>
+                    <th>Id_Producto</th>
+                    <th>Id_Cliente</th>
+                    <th>Metodo_pago</th>
+                    <th>Fecha_Venta</th>
+                    <th>Id_empleado</th>
+                    <th>Total</th>
+                    <th colspan="2">Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for p in ElVentas %}
+                <tr>
+                    <td>{{ forloop.counter }}</td>
+                    <td>{{ p.Id_Ventas }}</td>
+                    <td>{{ p.Id_Producto }}</td>
+                    <td>{{ p.Id_Cliente }}</td>
+                    <td>{{ p.Metodo_pago }}</td>
+                    <td>{{ p.Fecha_Venta }}</td>
+                    <td>{{ p.Id_empleado }}</td>
+                    <td>{{ p.Total }}</td>
+                    <td><a href="seleccionarVenta/{{ p.Id_Ventas }}" class="btn btn-info">Editar</a></td>
+                    <td><a href="borrarVenta/{{ p.Id_Ventas }}" class="btn btn-danger">Borrar</a></td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}

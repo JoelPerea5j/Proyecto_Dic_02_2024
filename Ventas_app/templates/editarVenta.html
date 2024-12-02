@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% block cuerpo %}
+<div class="row">
+    <div class="col-md-4 offset-md-4">
+        <h1>Editar Ventas</h1>
+        <form action="/editarVenta/" method="POST">
+            {% csrf_token %}
+            <div class="form-group">
+                <input type="text" id="txtVentas" name="txtVentas" class="form-control" value="{{ElVentas.Id_Ventas}}" maxlength="6" readonly>
+            </div>
+            <div class="form-group">
+                <input type="text" id="txtProduc" name="txtProduc" class="form-control" value="{{ElVentas.Id_Producto}}" maxlength="100" required>
+            </div>
+            <div class="form-group">
+                <input type="text" id="txtCliente" name="txtCliente" class="form-control" value="{{ElVentas.Id_Cliente}}" required>
+            </div>
+            <div class="form-group">
+                <input type="text" id="txtPago" name="txtPago" class="form-control" value="{{ElVentas.Metodo_pago}}" required>
+            </div>
+            <div class="form-group">
+                <input type="text" id="txtFecha" name="txtFecha" class="form-control" value="{{ElVentas.Fecha_Venta}}" maxlength="100" required>
+            </div>
+            <div class="form-group">
+                <input type="text" id="txtEmpleado" name="txtEmpleado" class="form-control" value="{{ElVentas.Id_empleado}}" required>
+            </div>
+            <div class="form-group">
+                <input type="text" id="txtTotal" name="txtTotal" class="form-control" value="{{ElVentas.Total}}" maxlength="100" required>
+            </div>
+            <button type="submit" class="btn btn-primary">Guardar</button>
+        </form>
+    </div>
+</div>
+{% endblock %}
