@@ -1,0 +1,60 @@
+{% extends "base.html" %}
+{% load static %}
+{% block cuerpo %}
+<div class="row">
+    <div class="col-md-4">
+        <h1>Registrar Proveedor</h1>
+        <form action="/registrarProvedor/" method="POST">
+            {% csrf_token %}
+            <div class="form-group">
+                <input type="text" id="txtCompra" name="txtCompra" class="form-control" placeholder="ID compra" maxlength="6" required>
+            </div>
+            <div class="form-group">
+                <input type="text" id="txtNombre" name="txtNombre" class="form-control" placeholder="Nombre" maxlength="100" required>
+            </div>
+            <div class="form-group">
+                <input type="text" id="txtDireccion" name="txtDireccion" class="form-control" placeholder="Direccion" required>
+            </div>
+            <div class="form-group">
+                <input type="text" id="txtTelefono" name="txtTelefono" class="form-control" placeholder="Telefono" required>
+            </div>
+            <div class="form-group">
+                <input type="text" id="txtCorreo" name="txtCorreo" class="form-control" placeholder="Correo Electronico" maxlength="100" required>
+            </div>
+            <button type="submit" class="btn btn-primary">Guardar</button>
+        </form>
+    </div>
+
+    <div class="col-md-8">
+        <h1>Listado de Proveedores</h1>
+        <img class="rounded mx-auto d-block" src="{% static "img/TABAQUERIA.jpg" %}" alt="" />
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Id_compra</th>
+                    <th>Nombre</th>
+                    <th>Direccion</th>
+                    <th>Telefono</th>
+                    <th>Correo</th>
+                    <th colspan="2">Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for p in misprovedores %}
+                <tr>
+                    <td>{{ forloop.counter }}</td>
+                    <td>{{ p.Id_compra }}</td>
+                    <td>{{ p.Nombre }}</td>
+                    <td>{{ p.Direccion }}</td>
+                    <td>{{ p.Telefono }}</td>
+                    <td>{{ p.Correo }}</td>
+                    <td><a href="seleccionarProvedor/{{ p.Id_compra }}" class="btn btn-info">Editar</a></td>
+                    <td><a href="borrarProvedor/{{ p.Id_compra }}" class="btn btn-danger">Borrar</a></td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}
